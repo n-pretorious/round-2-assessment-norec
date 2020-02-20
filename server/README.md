@@ -28,6 +28,10 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+The program allows:-
+  - a new user to register
+  - an existing user to login and get their details
+
 ## Installation
 
 ```bash
@@ -50,9 +54,6 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
-$ npm run test
-
 # e2e tests
 $ npm run test:e2e
 
