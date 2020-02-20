@@ -1,24 +1,65 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { Test, TestingModule } from '@nestjs/testing'
+import { INestApplication } from '@nestjs/common'
+import * as request from 'supertest'
+import { AppModule } from './../src/app.module'
 
-describe('AppController (e2e)', () => {
+describe('AppModule', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = moduleRef.createNestApplication();
     await app.init();
   });
+  
+  afterAll(async () => {
+    await app.close()
+  })
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
-});
+  it(`/POST /auth/register, it can register a user`, (done) => { 
+    request(app.getHttpServer())
+      .post('/auth/register')
+      .send({
+        firstName: 'Test',
+        familyName: 'Test Family',
+        email: 'test.test@example.com',
+        password: '1234567890',
+      })
+      .expect(201)
+      .expect(result => {
+        expect(result.body.id).not.toBeNull()
+      })
+      .end(done);
+  })
+
+  it(`/POST /auth/login, it can log in an existing user`, (done) => { 
+    request(app.getHttpServer())
+      .post('/auth/register')
+      .send({
+        firstName: 'Test2',
+        familyName: 'Test Family2',
+        email: 'test2.tes2t@example.com',
+        password: '1234567890',
+      })
+      .expect(201)
+      .expect(result => {
+        expect(result.body.id).not.toBeNull()
+      })
+      .end(() => {
+        request(app.getHttpServer())
+          .post('/auth/login')
+          .send({
+            email: 'test2.test2@example.com',
+            password: '1234567890',
+          })
+          // .expect(201)
+          .expect(result => {
+            expect(result.body.jwt).not.toBeNull()
+          })
+          .end(done);
+      })
+  })
+})

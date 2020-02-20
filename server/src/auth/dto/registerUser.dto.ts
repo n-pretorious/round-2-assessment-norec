@@ -4,7 +4,6 @@ import {
 } from "class-validator"
 
 export class RegisterUserDto {
-  id?: string
   firstName: string
   familyName: string
 

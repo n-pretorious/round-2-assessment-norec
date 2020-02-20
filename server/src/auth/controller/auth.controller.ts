@@ -6,7 +6,7 @@ import { Controller,
     Param
 } from '@nestjs/common'
 
-import { UserService } from 'src/user/service/user.service'
+import { UserService } from '../../user/service/user.service'
 
 import { AuthGuard } from '@nestjs/passport'
 
@@ -17,7 +17,7 @@ import { AuthService } from '../service/auth.service'
 import { Payload } from '../../interface/payload.interface'
 
 import { UserDecorator } from '../../user/utilities/user.decorator'
-import { User } from 'src/interface/user.interface'
+import { User } from '../../interface/user.interface'
 
 @Controller('auth')
 export class AuthController {
@@ -44,6 +44,7 @@ export class AuthController {
     async login(@Body() loginUserDto: LoginUserDto) {
         
         const user = await this.userService.findByLogin(loginUserDto)
+        console.log({ user })
 
         const payload: Payload = {
             email: user.email,
@@ -52,7 +53,9 @@ export class AuthController {
 
         const token = this.authService.signPayload(payload)
 
-        return token
+        return {
+            jwt: token
+        }
       }
 
 }
