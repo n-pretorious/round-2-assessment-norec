@@ -29,8 +29,8 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 The program allows:-
-  - a new user to register
-  - an existing user to login and get their details
+  - a **new user** to **register**.
+  - an **existing user** to **login** and returns their details.
 
 ## Installation
 
