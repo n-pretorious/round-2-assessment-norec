@@ -4,6 +4,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
 import { UserModule } from './user/user.module'
+import { AuthModule } from './auth/auth.module'
 
 import { MongooseModule } from '@nestjs/mongoose'
 
@@ -11,13 +12,14 @@ import config from './config/keys'
 
 @Module({
   imports: [
-    UserModule,
     MongooseModule.forRoot(
       config.mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
       }
-    )
+    ),
+    UserModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
