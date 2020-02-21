@@ -39,10 +39,6 @@ $ npm install
 replace the "mongoUri" with a valid mongodb connection string before running the app
 https://github.com/n-pretorious/round-2-assessment-norec/blob/master/server/src/config/keys.ts
 
-```bash
-$ npm install
-```
-
 ## Running the app
 
 ```bash
