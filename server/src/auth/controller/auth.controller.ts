@@ -19,7 +19,7 @@ import { Payload } from '../../interface/payload.interface'
 import { UserDecorator } from '../../user/utilities/user.decorator'
 import { User } from '../../interface/user.interface'
 
-@Controller('auth')
+@Controller('api/v1/auth')
 export class AuthController {
     constructor (
         private userService: UserService,
@@ -44,7 +44,6 @@ export class AuthController {
     async login(@Body() loginUserDto: LoginUserDto) {
         
         const user = await this.userService.findByLogin(loginUserDto)
-        console.log({ user })
 
         const payload: Payload = {
             email: user.email,

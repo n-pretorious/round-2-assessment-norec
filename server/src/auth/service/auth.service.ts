@@ -12,11 +12,11 @@ import config from '../../config/keys'
 export class AuthService {
     constructor (private userService: UserService) {}
 
-    async signPayload(payload: Payload) {
+    signPayload(payload: Payload) {
         return sign(payload, config.JWT_secret_key, {expiresIn: '24h'})
     }
 
     async validateUser(payload: Payload) {
-        return this.userService.findByPayload(payload)
+        return await this.userService.findByPayload(payload)
     }
 }

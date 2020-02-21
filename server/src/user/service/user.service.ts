@@ -19,7 +19,7 @@ export class UserService {
       }
 
     async findOne(user: User): Promise<User> {
-        return this.userModel.findById(user)
+        return await this.userModel.findById(user)
     }
 
     // create a new
@@ -47,7 +47,6 @@ export class UserService {
         const { email, password } = loginUserDto
 
         const user = await this.userModel.findOne({ email })
-        console.log({ user })
 
         //check if a user does not exist
         if (!user) {
