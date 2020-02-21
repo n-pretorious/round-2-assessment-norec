@@ -26,7 +26,7 @@
 
 ## Description
 
-A NestJS framework and MongoDB/Mongoose REST API that allows:-
+A NestJS framework and MongoDB/Mongoose API that allows:-
   - a **new user** to **register** and **login** using JWT.
 
 ## Installation
